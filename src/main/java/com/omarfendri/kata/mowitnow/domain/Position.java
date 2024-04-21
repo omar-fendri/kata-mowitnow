@@ -3,11 +3,11 @@ package com.omarfendri.kata.mowitnow.domain;
 import lombok.Builder;
 
 @Builder
-public class Coordinate {
+public class Position {
     int x;
     int y;
 
-    public Coordinate(int x, int y) {
+    public Position(int x, int y) {
         this.x = x;
         this.y = y;
     }

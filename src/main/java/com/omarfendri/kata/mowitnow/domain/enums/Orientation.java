@@ -10,7 +10,15 @@ public enum Orientation {
     Orientation(char symbol) {
         this.symbol = String.valueOf(symbol);
     }
-
+    public static Orientation getFromChar(String character) {
+        return switch (character) {
+            case "N" -> NORTH;
+            case "E" -> EAST;
+            case "W" -> WEST;
+            case "S" -> SOUTH;
+            default -> throw new IllegalArgumentException("Unknown input");
+        };
+    }
     public String getSymbol() {
         return symbol;
     }

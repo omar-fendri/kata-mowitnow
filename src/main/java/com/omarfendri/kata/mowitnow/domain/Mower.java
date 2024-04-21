@@ -1,18 +1,25 @@
 package com.omarfendri.kata.mowitnow.domain;
 
 import com.omarfendri.kata.mowitnow.domain.enums.Orientation;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.experimental.SuperBuilder;
 
 @Getter
 @SuperBuilder
 public class Mower {
-    private final Coordinate coordinate;
+    private final Position position;
     private final Orientation orientation;
 
-    public Mower(Coordinate coordinate, Orientation orientation) {
-        this.coordinate = coordinate;
+    public Mower(Position position, Orientation orientation) {
+        this.position = position;
         this.orientation = orientation;
+    }
+
+    public int getX(){
+        return getPosition().getX();
+    }
+
+    public int getY() {
+        return getPosition().getY();
     }
 }

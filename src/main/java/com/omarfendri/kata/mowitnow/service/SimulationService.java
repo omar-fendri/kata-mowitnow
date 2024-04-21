@@ -1,6 +1,6 @@
 package com.omarfendri.kata.mowitnow.service;
 
-import com.omarfendri.kata.mowitnow.domain.Coordinate;
+import com.omarfendri.kata.mowitnow.domain.Position;
 import com.omarfendri.kata.mowitnow.domain.Grid;
 import com.omarfendri.kata.mowitnow.domain.Mower;
 import com.omarfendri.kata.mowitnow.domain.enums.Instruction;
@@ -11,18 +11,18 @@ public class SimulationService {
         switch (instruction) {
             case RIGHT:
                 return Mower.builder()
-                        .coordinate(mower.getCoordinate())
+                        .position(mower.getPosition())
                         .orientation(turnRight(mower))
                         .build();
             case LEFT:
                 return Mower.builder()
-                        .coordinate(mower.getCoordinate())
+                        .position(mower.getPosition())
                         .orientation(turnLeft(mower))
                         .build();
             case FORWARD:
-                if (isValidCoordinate(calculateCoordinateWhenMovingForward(mower), grid)) {
+                if (isValidPosition(calculatePositionWhenMovingForward(mower), grid)) {
                     return Mower.builder()
-                            .coordinate(calculateCoordinateWhenMovingForward(mower))
+                            .position(calculatePositionWhenMovingForward(mower))
                             .orientation(mower.getOrientation())
                             .build();
                 }
@@ -31,23 +31,23 @@ public class SimulationService {
         }
     }
 
-    private static Coordinate calculateCoordinateWhenMovingForward(Mower mower) {
+    private static Position calculatePositionWhenMovingForward(Mower mower) {
         return switch(mower.getOrientation()) {
-            case NORTH -> Coordinate.builder()
-                    .x(mower.getCoordinate().getX())
-                    .y(mower.getCoordinate().getY() + 1)
+            case NORTH -> Position.builder()
+                    .x(mower.getPosition().getX())
+                    .y(mower.getPosition().getY() + 1)
                     .build();
-            case EAST -> Coordinate.builder()
-                    .x(mower.getCoordinate().getX() + 1)
-                    .y(mower.getCoordinate().getY())
+            case EAST -> Position.builder()
+                    .x(mower.getPosition().getX() + 1)
+                    .y(mower.getPosition().getY())
                     .build();
-            case SOUTH -> Coordinate.builder()
-                    .x(mower.getCoordinate().getX())
-                    .y(mower.getCoordinate().getY() - 1)
+            case SOUTH -> Position.builder()
+                    .x(mower.getPosition().getX())
+                    .y(mower.getPosition().getY() - 1)
                     .build();
-            case WEST -> Coordinate.builder()
-                    .x(mower.getCoordinate().getX() - 1)
-                    .y(mower.getCoordinate().getY())
+            case WEST -> Position.builder()
+                    .x(mower.getPosition().getX() - 1)
+                    .y(mower.getPosition().getY())
                     .build();
         };
     }
@@ -70,11 +70,11 @@ public class SimulationService {
         };
     }
 
-    private boolean isValidCoordinate(Coordinate newCoordinate, Grid grid) {
-        return newCoordinate.getX() >= 0 &&
-                newCoordinate.getY() >= 0 &&
-                newCoordinate.getX() <= grid.getWidth() &&
-                newCoordinate.getY() <= grid.getHeight();
+    private boolean isValidPosition(Position newPosition, Grid grid) {
+        return newPosition.getX() >= 0 &&
+                newPosition.getY() >= 0 &&
+                newPosition.getX() <= grid.getWidth() &&
+                newPosition.getY() <= grid.getHeight();
     }
 
 }
