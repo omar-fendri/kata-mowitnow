@@ -1,5 +1,6 @@
 package com.omarfendri.kata.mowitnow;
 
+import com.omarfendri.kata.mowitnow.domain.AutonomousMower;
 import com.omarfendri.kata.mowitnow.domain.Position;
 import com.omarfendri.kata.mowitnow.domain.Grid;
 import com.omarfendri.kata.mowitnow.domain.Mower;
@@ -139,5 +140,33 @@ public class SimulationTest {
         assertThat(simulatedMower.getX()).isEqualTo(3);
         assertThat(simulatedMower.getY()).isEqualTo(7); // Should not move beyond grid
     }
+
+    @Test
+    public void testMowerMovesToCorrectPosition() {
+        // Given
+        Position startPosition = new Position(0, 0);
+        Orientation startOrientation = Orientation.NORTH;
+        AutonomousMower mower = AutonomousMower.builder()
+                .position(startPosition)
+                .orientation(startOrientation)
+                .build();
+
+        // When
+        mower.addInstruction(Instruction.FORWARD); // Move to (0, 1)
+        mower.addInstruction(Instruction.RIGHT);   // Face EAST
+        mower.addInstruction(Instruction.FORWARD); // Move to (1, 1)
+        mower.addInstruction(Instruction.FORWARD); // Move to (2, 1)
+        mower.addInstruction(Instruction.LEFT);    // Face NORTH again
+        mower.addInstruction(Instruction.FORWARD); // Move to (2, 2)
+
+        // Simulate the mower moving based on added actions
+        //simulateMowerActions(mower);
+
+        // Then
+        assertThat(mower.getPosition()).isEqualToComparingFieldByField(new Position(2, 2));
+        assertThat(mower.getOrientation()).isEqualTo(Orientation.NORTH);
+    }
+
+
 
 }

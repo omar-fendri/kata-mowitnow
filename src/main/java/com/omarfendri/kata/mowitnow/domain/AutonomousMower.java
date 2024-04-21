@@ -15,7 +15,7 @@ public class AutonomousMower extends Mower {
         super(position, orientation);
         instructionList = new ArrayList<>();
     }
-    public void addAction(Instruction instruction) {
+    public void addInstruction(Instruction instruction) {
         instructionList.add(instruction);
     }
 

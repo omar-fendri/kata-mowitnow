@@ -1,5 +1,6 @@
 package com.omarfendri.kata.mowitnow.service;
 
+import com.omarfendri.kata.mowitnow.domain.AutonomousMower;
 import com.omarfendri.kata.mowitnow.domain.Position;
 import com.omarfendri.kata.mowitnow.domain.Grid;
 import com.omarfendri.kata.mowitnow.domain.Mower;
@@ -29,6 +30,20 @@ public class SimulationService {
             default:
                 return mower; // keep same state
         }
+    }
+
+    public AutonomousMower simulateAutonomousMower(AutonomousMower mower, Grid grid) {
+       /* Mower finalMowerState = mower.getInstructionList().stream()
+                // Start with the initial mower state and apply each instruction sequentially
+                .reduce(mower, (currentMower, instruction) -> applyInstruction(instruction, currentMower, grid), (m1, m2) -> m2);
+
+        // Build and return a new AutonomousMower with the final state
+        return AutonomousMower.builder()
+                .position(finalMowerState.getPosition())
+                .orientation(finalMowerState.getOrientation())
+                .instructionList(mower.getInstructionList())  // Optionally reassign the instruction list if needed
+                .build(); */
+        return null;
     }
 
     private static Position calculatePositionWhenMovingForward(Mower mower) {
