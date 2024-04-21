@@ -32,18 +32,14 @@ public class SimulationService {
         }
     }
 
-    public AutonomousMower simulateAutonomousMower(AutonomousMower mower, Grid grid) {
-       /* Mower finalMowerState = mower.getInstructionList().stream()
-                // Start with the initial mower state and apply each instruction sequentially
-                .reduce(mower, (currentMower, instruction) -> applyInstruction(instruction, currentMower, grid), (m1, m2) -> m2);
+    public AutonomousMower simulateAutonomousMower(AutonomousMower autonomousMower, Grid grid) {
+       Mower finalMowerState = autonomousMower.getInstructionsList().stream()
+                .reduce(autonomousMower.getMower(), (currentMower, instruction) -> applyInstruction(instruction, currentMower, grid), (m1, m2) -> m2);
 
-        // Build and return a new AutonomousMower with the final state
         return AutonomousMower.builder()
-                .position(finalMowerState.getPosition())
-                .orientation(finalMowerState.getOrientation())
-                .instructionList(mower.getInstructionList())  // Optionally reassign the instruction list if needed
-                .build(); */
-        return null;
+                .mower(finalMowerState)
+                .instructionsList(autonomousMower.getInstructionsList())  // Optionally reassign the instruction list if needed
+                .build();
     }
 
     private static Position calculatePositionWhenMovingForward(Mower mower) {

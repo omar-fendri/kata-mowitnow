@@ -9,7 +9,14 @@ public enum Instruction {
     Instruction(char symbol) {
         this.symbol = String.valueOf(symbol);
     }
-
+    public static <Char> Instruction getFromChar(char character) {
+        return switch (character) {
+            case 'D' -> RIGHT;
+            case 'G' -> LEFT;
+            case 'A' -> FORWARD;
+            default -> throw new IllegalArgumentException("Unknown input");
+        };
+    }
     public String getSymbol() {
         return symbol;
     }

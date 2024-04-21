@@ -88,9 +88,9 @@ public class SimulationTest {
         // When
         Mower simulatedMower = simulationService.applyInstruction(Instruction.LEFT, mower, grid);
         // Then
-        assertThat(simulatedMower.getOrientation()).isEqualTo(Orientation.WEST);
         assertThat(simulatedMower.getX()).isEqualTo(3);
         assertThat(simulatedMower.getY()).isEqualTo(5);
+        assertThat(simulatedMower.getOrientation()).isEqualTo(Orientation.WEST);
     }
 
     @Test
@@ -100,9 +100,9 @@ public class SimulationTest {
         // When
         Mower simulatedMower = simulationService.applyInstruction(Instruction.LEFT, mower, grid);
         // Then
-        assertThat(simulatedMower.getOrientation()).isEqualTo(Orientation.SOUTH);
         assertThat(simulatedMower.getX()).isEqualTo(3);
         assertThat(simulatedMower.getY()).isEqualTo(5);
+        assertThat(simulatedMower.getOrientation()).isEqualTo(Orientation.SOUTH);
     }
 
     @Test
@@ -112,9 +112,9 @@ public class SimulationTest {
         // When
         Mower simulatedMower = simulationService.applyInstruction(Instruction.RIGHT, mower, grid);
         // Then
-        assertThat(simulatedMower.getOrientation()).isEqualTo(Orientation.NORTH);
         assertThat(simulatedMower.getX()).isEqualTo(3);
         assertThat(simulatedMower.getY()).isEqualTo(5);
+        assertThat(simulatedMower.getOrientation()).isEqualTo(Orientation.NORTH);
     }
 
     @Test
@@ -124,9 +124,9 @@ public class SimulationTest {
         // When
         Mower simulatedMower = simulationService.applyInstruction(Instruction.RIGHT, mower, grid);
         // Then
-        assertThat(simulatedMower.getOrientation()).isEqualTo(Orientation.EAST);
         assertThat(simulatedMower.getX()).isEqualTo(3);
         assertThat(simulatedMower.getY()).isEqualTo(5);
+        assertThat(simulatedMower.getOrientation()).isEqualTo(Orientation.EAST);
     }
 
     @Test
@@ -136,37 +136,37 @@ public class SimulationTest {
         // When
         Mower simulatedMower = simulationService.applyInstruction(Instruction.FORWARD, mower, grid);
         // Then
-        assertThat(simulatedMower.getOrientation()).isEqualTo(Orientation.NORTH);
         assertThat(simulatedMower.getX()).isEqualTo(3);
         assertThat(simulatedMower.getY()).isEqualTo(7); // Should not move beyond grid
+        assertThat(simulatedMower.getOrientation()).isEqualTo(Orientation.NORTH);
     }
 
     @Test
-    public void testMowerMovesToCorrectPosition() {
+    public void autonomousMowerMovesToCorrectPosition() {
         // Given
-        Position startPosition = new Position(0, 0);
-        Orientation startOrientation = Orientation.NORTH;
-        AutonomousMower mower = AutonomousMower.builder()
-                .position(startPosition)
-                .orientation(startOrientation)
-                .build();
-
+        grid = Grid.builder().height(5).width(5).build();
+        AutonomousMower autonomousMower = MowerService
+                .fromString("1 2 N", "GAGAGAGAA");
         // When
-        mower.addInstruction(Instruction.FORWARD); // Move to (0, 1)
-        mower.addInstruction(Instruction.RIGHT);   // Face EAST
-        mower.addInstruction(Instruction.FORWARD); // Move to (1, 1)
-        mower.addInstruction(Instruction.FORWARD); // Move to (2, 1)
-        mower.addInstruction(Instruction.LEFT);    // Face NORTH again
-        mower.addInstruction(Instruction.FORWARD); // Move to (2, 2)
-
-        // Simulate the mower moving based on added actions
-        //simulateMowerActions(mower);
-
+        AutonomousMower simulatedAutonomousMower = simulationService.simulateAutonomousMower(autonomousMower, grid);
         // Then
-        assertThat(mower.getPosition()).isEqualToComparingFieldByField(new Position(2, 2));
-        assertThat(mower.getOrientation()).isEqualTo(Orientation.NORTH);
+        assertThat(simulatedAutonomousMower.getX()).isEqualTo(1);
+        assertThat(simulatedAutonomousMower.getY()).isEqualTo(3);
+        assertThat(simulatedAutonomousMower.getOrientation()).isEqualTo(Orientation.NORTH);
     }
 
+    @Test
+    public void autonomousMowerIsCorrectlyInitializedFromString() {
+        // When
+        AutonomousMower autonomousMower = MowerService
+                .fromString("0 0 N", "ADAAGA");
+        // Then
+        assertThat(autonomousMower.getX()).isEqualTo(0);
+        assertThat(autonomousMower.getY()).isEqualTo(0);
+        assertThat(autonomousMower.getOrientation()).isEqualTo(Orientation.NORTH);
+        assertThat(autonomousMower.getInstructionsList()).containsExactly(Instruction.FORWARD,
+                Instruction.RIGHT, Instruction.FORWARD, Instruction.FORWARD, Instruction.LEFT, Instruction.FORWARD);
 
+    }
 
 }
