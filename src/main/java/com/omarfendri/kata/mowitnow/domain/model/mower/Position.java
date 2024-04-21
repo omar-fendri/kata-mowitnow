@@ -1,4 +1,4 @@
-package com.omarfendri.kata.mowitnow.domain;
+package com.omarfendri.kata.mowitnow.domain.model.mower;
 
 import lombok.Builder;
 

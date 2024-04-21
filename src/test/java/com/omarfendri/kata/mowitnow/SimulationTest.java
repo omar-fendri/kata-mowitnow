@@ -1,13 +1,13 @@
 package com.omarfendri.kata.mowitnow;
 
-import com.omarfendri.kata.mowitnow.domain.AutonomousMower;
-import com.omarfendri.kata.mowitnow.domain.Position;
-import com.omarfendri.kata.mowitnow.domain.Grid;
-import com.omarfendri.kata.mowitnow.domain.Mower;
-import com.omarfendri.kata.mowitnow.domain.enums.Instruction;
-import com.omarfendri.kata.mowitnow.domain.enums.Orientation;
-import com.omarfendri.kata.mowitnow.service.MowerService;
-import com.omarfendri.kata.mowitnow.service.SimulationService;
+import com.omarfendri.kata.mowitnow.domain.model.mower.AutonomousMower;
+import com.omarfendri.kata.mowitnow.domain.model.grid.Grid;
+import com.omarfendri.kata.mowitnow.domain.model.mower.Mower;
+import com.omarfendri.kata.mowitnow.domain.model.mower.Instruction;
+import com.omarfendri.kata.mowitnow.domain.model.mower.Orientation;
+import com.omarfendri.kata.mowitnow.infrastructure.utils.GridFactory;
+import com.omarfendri.kata.mowitnow.infrastructure.utils.MowerFactory;
+import com.omarfendri.kata.mowitnow.domain.service.SimulationService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -24,9 +24,19 @@ public class SimulationTest {
     }
 
     @Test
+    public void gridIsCorrectlyInitializedFromString(){
+        // When
+        Grid grid = GridFactory.fromString("5 6");
+        // Then
+        assertThat(grid.getWidth()).isEqualTo(5);
+        assertThat(grid.getHeight()).isEqualTo(6);
+    }
+
+
+    @Test
     public void mowerIsCorrectlyInitializedFromString() {
         // When
-        Mower mower = MowerService.fromString("3 5 N");
+        Mower mower = MowerFactory.fromString("3 5 N");
         // Then
         assertThat(mower.getX()).isEqualTo(3);
         assertThat(mower.getY()).isEqualTo(5);
@@ -36,7 +46,7 @@ public class SimulationTest {
     @Test
     public void mowerMovesForwardWhenFacingNorth() {
         // Given
-        Mower mower = MowerService.fromString("3 5 N");
+        Mower mower = MowerFactory.fromString("3 5 N");
         // When
         Mower simulatedMower = simulationService.applyInstruction(Instruction.FORWARD, mower, grid);
         // Then
@@ -48,7 +58,7 @@ public class SimulationTest {
     @Test
     public void mowerMovesForwardWhenFacingSouth() {
         // Given
-        Mower mower = MowerService.fromString("3 5 S");
+        Mower mower = MowerFactory.fromString("3 5 S");
         // When
         Mower simulatedMower = simulationService.applyInstruction(Instruction.FORWARD, mower, grid);
         // Then
@@ -60,7 +70,7 @@ public class SimulationTest {
     @Test
     public void mowerMovesForwardWhenFacingEast() {
         // Given
-        Mower mower = MowerService.fromString("3 5 E");
+        Mower mower = MowerFactory.fromString("3 5 E");
         // When
         Mower simulatedMower = simulationService.applyInstruction(Instruction.FORWARD, mower, grid);
         // Then
@@ -72,7 +82,7 @@ public class SimulationTest {
     @Test
     public void mowerMovesForwardWhenFacingWest() {
         // Given
-        Mower mower = MowerService.fromString("3 5 W");
+        Mower mower = MowerFactory.fromString("3 5 W");
         // When
         Mower simulatedMower = simulationService.applyInstruction(Instruction.FORWARD, mower, grid);
         // Then
@@ -84,7 +94,7 @@ public class SimulationTest {
     @Test
     public void mowerTurnsLeftFromNorthToWest() {
         // Given
-        Mower mower = MowerService.fromString("3 5 N");
+        Mower mower = MowerFactory.fromString("3 5 N");
         // When
         Mower simulatedMower = simulationService.applyInstruction(Instruction.LEFT, mower, grid);
         // Then
@@ -96,7 +106,7 @@ public class SimulationTest {
     @Test
     public void mowerTurnsLeftFromWestToSouth() {
         // Given
-        Mower mower = MowerService.fromString("3 5 W");
+        Mower mower = MowerFactory.fromString("3 5 W");
         // When
         Mower simulatedMower = simulationService.applyInstruction(Instruction.LEFT, mower, grid);
         // Then
@@ -108,7 +118,7 @@ public class SimulationTest {
     @Test
     public void mowerTurnsRightFromWestToNorth() {
         //Given
-        Mower mower = MowerService.fromString("3 5 W");
+        Mower mower = MowerFactory.fromString("3 5 W");
         // When
         Mower simulatedMower = simulationService.applyInstruction(Instruction.RIGHT, mower, grid);
         // Then
@@ -120,7 +130,7 @@ public class SimulationTest {
     @Test
     public void mowerTurnsRightFromNorthToEast() {
         // Given
-        Mower mower = MowerService.fromString("3 5 N");
+        Mower mower = MowerFactory.fromString("3 5 N");
         // When
         Mower simulatedMower = simulationService.applyInstruction(Instruction.RIGHT, mower, grid);
         // Then
@@ -132,7 +142,7 @@ public class SimulationTest {
     @Test
     public void mowerDoesNotMoveBeyondGridEdgeWhenMovingForward() {
         // Given
-        Mower mower = MowerService.fromString("3 7 N");
+        Mower mower = MowerFactory.fromString("3 7 N");
         // When
         Mower simulatedMower = simulationService.applyInstruction(Instruction.FORWARD, mower, grid);
         // Then
@@ -144,8 +154,8 @@ public class SimulationTest {
     @Test
     public void autonomousMowerMovesToCorrectPosition() {
         // Given
-        grid = Grid.builder().height(5).width(5).build();
-        AutonomousMower autonomousMower = MowerService
+        grid = GridFactory.fromString("5 5");
+        AutonomousMower autonomousMower = MowerFactory
                 .fromString("1 2 N", "GAGAGAGAA");
         // When
         AutonomousMower simulatedAutonomousMower = simulationService.simulateAutonomousMower(autonomousMower, grid);
@@ -158,7 +168,7 @@ public class SimulationTest {
     @Test
     public void autonomousMowerIsCorrectlyInitializedFromString() {
         // When
-        AutonomousMower autonomousMower = MowerService
+        AutonomousMower autonomousMower = MowerFactory
                 .fromString("0 0 N", "ADAAGA");
         // Then
         assertThat(autonomousMower.getX()).isEqualTo(0);
@@ -166,7 +176,8 @@ public class SimulationTest {
         assertThat(autonomousMower.getOrientation()).isEqualTo(Orientation.NORTH);
         assertThat(autonomousMower.getInstructionsList()).containsExactly(Instruction.FORWARD,
                 Instruction.RIGHT, Instruction.FORWARD, Instruction.FORWARD, Instruction.LEFT, Instruction.FORWARD);
-
     }
+
+
 
 }

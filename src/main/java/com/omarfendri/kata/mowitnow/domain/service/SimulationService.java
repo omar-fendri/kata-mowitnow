@@ -1,11 +1,11 @@
-package com.omarfendri.kata.mowitnow.service;
+package com.omarfendri.kata.mowitnow.domain.service;
 
-import com.omarfendri.kata.mowitnow.domain.AutonomousMower;
-import com.omarfendri.kata.mowitnow.domain.Position;
-import com.omarfendri.kata.mowitnow.domain.Grid;
-import com.omarfendri.kata.mowitnow.domain.Mower;
-import com.omarfendri.kata.mowitnow.domain.enums.Instruction;
-import com.omarfendri.kata.mowitnow.domain.enums.Orientation;
+import com.omarfendri.kata.mowitnow.domain.model.mower.AutonomousMower;
+import com.omarfendri.kata.mowitnow.domain.model.mower.Position;
+import com.omarfendri.kata.mowitnow.domain.model.grid.Grid;
+import com.omarfendri.kata.mowitnow.domain.model.mower.Mower;
+import com.omarfendri.kata.mowitnow.domain.model.mower.Instruction;
+import com.omarfendri.kata.mowitnow.domain.model.mower.Orientation;
 
 public class SimulationService {
     public Mower applyInstruction(Instruction instruction, Mower mower, Grid grid) {
@@ -38,7 +38,7 @@ public class SimulationService {
 
         return AutonomousMower.builder()
                 .mower(finalMowerState)
-                .instructionsList(autonomousMower.getInstructionsList())  // Optionally reassign the instruction list if needed
+                .instructionsList(autonomousMower.getInstructionsList())
                 .build();
     }
 

@@ -1,4 +1,4 @@
-package com.omarfendri.kata.mowitnow.domain.enums;
+package com.omarfendri.kata.mowitnow.domain.model.mower;
 
 public enum Orientation {
     NORTH('N'),

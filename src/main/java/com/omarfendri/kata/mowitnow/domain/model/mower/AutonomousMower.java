@@ -1,7 +1,5 @@
-package com.omarfendri.kata.mowitnow.domain;
+package com.omarfendri.kata.mowitnow.domain.model.mower;
 
-import com.omarfendri.kata.mowitnow.domain.enums.Instruction;
-import com.omarfendri.kata.mowitnow.domain.enums.Orientation;
 import lombok.Builder;
 import lombok.Getter;
 

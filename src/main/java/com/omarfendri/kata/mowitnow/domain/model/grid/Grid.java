@@ -1,4 +1,4 @@
-package com.omarfendri.kata.mowitnow.domain;
+package com.omarfendri.kata.mowitnow.domain.model.grid;
 
 import lombok.Builder;
 
@@ -6,12 +6,6 @@ import lombok.Builder;
 public class Grid {
     int height;
     int width;
-
-    public Grid(int height, int width) {
-        this.height = height;
-        this.width = width;
-    }
-
     public int getHeight() {
         return height;
     }

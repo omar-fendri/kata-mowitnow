@@ -1,15 +1,15 @@
-package com.omarfendri.kata.mowitnow.service;
+package com.omarfendri.kata.mowitnow.infrastructure.utils;
 
-import com.omarfendri.kata.mowitnow.domain.AutonomousMower;
-import com.omarfendri.kata.mowitnow.domain.Mower;
-import com.omarfendri.kata.mowitnow.domain.Position;
-import com.omarfendri.kata.mowitnow.domain.enums.Instruction;
-import com.omarfendri.kata.mowitnow.domain.enums.Orientation;
+import com.omarfendri.kata.mowitnow.domain.model.mower.AutonomousMower;
+import com.omarfendri.kata.mowitnow.domain.model.mower.Mower;
+import com.omarfendri.kata.mowitnow.domain.model.mower.Position;
+import com.omarfendri.kata.mowitnow.domain.model.mower.Instruction;
+import com.omarfendri.kata.mowitnow.domain.model.mower.Orientation;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MowerService {
+public class MowerFactory {
     public static Mower fromString(String coordinateAndOrientationLine) {
         String[] parts = coordinateAndOrientationLine.split(" ");
         int x = Integer.parseInt(parts[0]);
