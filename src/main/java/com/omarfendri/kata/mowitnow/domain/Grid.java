@@ -4,16 +4,16 @@ import lombok.Builder;
 
 @Builder
 public class Grid {
-    int length;
+    int height;
     int width;
 
-    public Grid(int length, int width) {
-        this.length = length;
+    public Grid(int height, int width) {
+        this.height = height;
         this.width = width;
     }
 
-    public int getLength() {
-        return length;
+    public int getHeight() {
+        return height;
     }
 
     public int getWidth() {
