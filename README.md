@@ -8,7 +8,3 @@ The kata showcases the usage of Test-Driven Development (TDD) following the Chic
 
 <img width="1241" alt="Screenshot 2024-04-22 at 03 37 03" src="https://github.com/omar-fendri/kata-mowitnow/assets/32529265/746735b6-db8e-4f35-87de-9d7b4e7a69bd">
 
-
-# TDD Framework
-<img width="1408" alt="Screenshot 2024-04-22 at 03 39 26" src="https://github.com/omar-fendri/kata-mowitnow/assets/32529265/fba050a8-8704-4549-8e03-b553432de8a3">
-
