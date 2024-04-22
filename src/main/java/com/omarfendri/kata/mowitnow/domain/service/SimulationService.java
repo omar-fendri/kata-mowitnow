@@ -8,6 +8,16 @@ import com.omarfendri.kata.mowitnow.domain.model.mower.Instruction;
 import com.omarfendri.kata.mowitnow.domain.model.mower.Orientation;
 
 public class SimulationService {
+    public AutonomousMower simulateAutonomousMower(AutonomousMower autonomousMower, Grid grid) {
+        Mower finalMowerState = autonomousMower.getInstructionsList().stream()
+                .reduce(autonomousMower.getMower(), (currentMower, instruction) -> applyInstruction(instruction, currentMower, grid), (_, m2) -> m2);
+
+        return AutonomousMower.builder()
+                .mower(finalMowerState)
+                .instructionsList(autonomousMower.getInstructionsList())
+                .build();
+    }
+
     public Mower applyInstruction(Instruction instruction, Mower mower, Grid grid) {
         switch (instruction) {
             case RIGHT:
@@ -32,18 +42,8 @@ public class SimulationService {
         }
     }
 
-    public AutonomousMower simulateAutonomousMower(AutonomousMower autonomousMower, Grid grid) {
-       Mower finalMowerState = autonomousMower.getInstructionsList().stream()
-                .reduce(autonomousMower.getMower(), (currentMower, instruction) -> applyInstruction(instruction, currentMower, grid), (m1, m2) -> m2);
-
-        return AutonomousMower.builder()
-                .mower(finalMowerState)
-                .instructionsList(autonomousMower.getInstructionsList())
-                .build();
-    }
-
     private static Position calculatePositionWhenMovingForward(Mower mower) {
-        return switch(mower.getOrientation()) {
+        return switch (mower.getOrientation()) {
             case NORTH -> Position.builder()
                     .x(mower.getPosition().getX())
                     .y(mower.getPosition().getY() + 1)

@@ -14,7 +14,7 @@ public class MowerFactory {
         String[] parts = coordinateAndOrientationLine.split(" ");
         int x = Integer.parseInt(parts[0]);
         int y = Integer.parseInt(parts[1]);
-        Orientation orientation = Orientation.getFromChar(parts[2]);
+        Orientation orientation = Orientation.getFromChar(parts[2].charAt(0));
         return Mower.builder()
                 .orientation(orientation)
                 .position(Position.builder().x(x).y(y).build())
