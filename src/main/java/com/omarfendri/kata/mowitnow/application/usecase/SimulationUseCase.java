@@ -1,4 +1,4 @@
-package com.omarfendri.kata.mowitnow.application;
+package com.omarfendri.kata.mowitnow.application.usecase;
 
 import com.omarfendri.kata.mowitnow.application.port.out.MowerStateDisplayPort;
 import com.omarfendri.kata.mowitnow.domain.model.mower.AutonomousMower;

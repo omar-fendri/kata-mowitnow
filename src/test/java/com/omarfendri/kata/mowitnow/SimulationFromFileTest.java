@@ -1,6 +1,6 @@
 package com.omarfendri.kata.mowitnow;
 
-import com.omarfendri.kata.mowitnow.application.SimulationUseCase;
+import com.omarfendri.kata.mowitnow.application.usecase.SimulationUseCase;
 import com.omarfendri.kata.mowitnow.application.port.out.MowerStateDisplayPort;
 import com.omarfendri.kata.mowitnow.domain.service.SimulationService;
 import com.omarfendri.kata.mowitnow.infrastructure.adapter.in.FileAdapter;
@@ -32,12 +32,33 @@ public class SimulationFromFileTest {
         // Given
         ClassLoader classLoader = getClass().getClassLoader();
         Path filePath = Paths.get(Objects.requireNonNull(classLoader.getResource("mower_input.txt")).toURI());
-
         // When
         String result = fileAdapter.runSimulationFromFile(filePath.toString());
-
         // Then
         assertThat(result).isEqualTo("1 3 N\n5 1 E");
-
     }
+
+    @Test
+    public void testGridLineIsMissingParameter() throws IOException, URISyntaxException {
+        // Given
+        ClassLoader classLoader = getClass().getClassLoader();
+        Path filePath = Paths.get(Objects.requireNonNull(classLoader.getResource("mower_error.txt")).toURI());
+        // When
+        String result = fileAdapter.runSimulationFromFile(filePath.toString());
+        // Then
+        assertThat(result).isEqualTo(FileAdapter.CHECK_FILE_FORMAT_MSG);
+    }
+
+    @Test
+    public void testGridLineIsMissingParamAeter() throws IOException, URISyntaxException {
+        // Given
+        ClassLoader classLoader = getClass().getClassLoader();
+        Path filePath = Paths.get(Objects.requireNonNull(classLoader.getResource("mower_error2.txt")).toURI());
+        // When
+        String result = fileAdapter.runSimulationFromFile(filePath.toString());
+        // Then
+        assertThat(result).isEqualTo(FileAdapter.CHECK_FILE_FORMAT_MSG);
+    }
+
+
 }

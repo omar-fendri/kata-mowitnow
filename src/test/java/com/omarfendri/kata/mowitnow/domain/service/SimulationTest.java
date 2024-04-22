@@ -1,4 +1,4 @@
-package com.omarfendri.kata.mowitnow;
+package com.omarfendri.kata.mowitnow.domain.service;
 
 import com.omarfendri.kata.mowitnow.domain.model.mower.AutonomousMower;
 import com.omarfendri.kata.mowitnow.domain.model.grid.Grid;
@@ -20,27 +20,7 @@ public class SimulationTest {
     @BeforeEach
     public void setup(){
         simulationService = new SimulationService();
-        grid = Grid.builder().height(7).width(7).build();
-    }
-
-    @Test
-    public void gridIsCorrectlyInitializedFromString(){
-        // When
-        Grid grid = GridFactory.fromString("5 6");
-        // Then
-        assertThat(grid.getWidth()).isEqualTo(5);
-        assertThat(grid.getHeight()).isEqualTo(6);
-    }
-
-
-    @Test
-    public void mowerIsCorrectlyInitializedFromString() {
-        // When
-        Mower mower = MowerFactory.fromString("3 5 N");
-        // Then
-        assertThat(mower.getX()).isEqualTo(3);
-        assertThat(mower.getY()).isEqualTo(5);
-        assertThat(mower.getOrientation()).isEqualTo(Orientation.NORTH);
+        grid = GridFactory.fromString("7 7");
     }
 
     @Test
@@ -164,20 +144,4 @@ public class SimulationTest {
         assertThat(simulatedAutonomousMower.getY()).isEqualTo(3);
         assertThat(simulatedAutonomousMower.getOrientation()).isEqualTo(Orientation.NORTH);
     }
-
-    @Test
-    public void autonomousMowerIsCorrectlyInitializedFromString() {
-        // When
-        AutonomousMower autonomousMower = MowerFactory
-                .fromString("0 0 N", "ADAAGA");
-        // Then
-        assertThat(autonomousMower.getX()).isEqualTo(0);
-        assertThat(autonomousMower.getY()).isEqualTo(0);
-        assertThat(autonomousMower.getOrientation()).isEqualTo(Orientation.NORTH);
-        assertThat(autonomousMower.getInstructionsList()).containsExactly(Instruction.FORWARD,
-                Instruction.RIGHT, Instruction.FORWARD, Instruction.FORWARD, Instruction.LEFT, Instruction.FORWARD);
-    }
-
-
-
 }
