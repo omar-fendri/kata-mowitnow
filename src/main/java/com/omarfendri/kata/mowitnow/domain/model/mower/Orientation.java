@@ -1,5 +1,8 @@
 package com.omarfendri.kata.mowitnow.domain.model.mower;
 
+import lombok.Getter;
+
+@Getter
 public enum Orientation {
     NORTH('N'),
     EAST('E'),
@@ -18,8 +21,5 @@ public enum Orientation {
             case 'S' -> SOUTH;
             default -> throw new IllegalArgumentException("Unknown input");
         };
-    }
-    public String getSymbol() {
-        return symbol;
     }
 }

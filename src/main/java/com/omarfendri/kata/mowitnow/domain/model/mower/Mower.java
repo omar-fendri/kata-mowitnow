@@ -1,10 +1,10 @@
 package com.omarfendri.kata.mowitnow.domain.model.mower;
 
+import lombok.Builder;
 import lombok.Getter;
-import lombok.experimental.SuperBuilder;
 
 @Getter
-@SuperBuilder
+@Builder
 public class Mower {
     private final Position position;
     private final Orientation orientation;

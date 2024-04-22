@@ -1,5 +1,8 @@
 package com.omarfendri.kata.mowitnow.domain.model.mower;
 
+import lombok.Getter;
+
+@Getter
 public enum Instruction {
     RIGHT('D'),
     LEFT('G'),
@@ -16,8 +19,5 @@ public enum Instruction {
             case 'A' -> FORWARD;
             default -> throw new IllegalArgumentException("Unknown input");
         };
-    }
-    public String getSymbol() {
-        return symbol;
     }
 }
