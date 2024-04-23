@@ -6,11 +6,11 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class ConsoleAdapterTest {
+class ConsoleAdapterTest {
     private final ConsoleAdapter consoleAdapter = new ConsoleAdapter();
 
     @Test
-    public void outputIsCorrectlyDisplayed(){
+    void outputIsCorrectlyDisplayed(){
         // Given
         Mower mower = MowerFactory.fromString("4 5 N");
         // When

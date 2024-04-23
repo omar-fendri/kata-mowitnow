@@ -9,9 +9,9 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class FactoryTest {
+class FactoryTest {
     @Test
-    public void gridIsCorrectlyInitializedFromString(){
+     void gridIsCorrectlyInitializedFromString(){
         // When
         Grid grid = GridFactory.fromString("5 6");
         // Then
@@ -19,7 +19,7 @@ public class FactoryTest {
         assertThat(grid.getHeight()).isEqualTo(6);
     }
     @Test
-    public void autonomousMowerIsCorrectlyInitializedFromString() {
+     void autonomousMowerIsCorrectlyInitializedFromString() {
         // When
         AutonomousMower autonomousMower = MowerFactory
                 .fromString("0 0 N", "ADAAGA");
@@ -31,7 +31,7 @@ public class FactoryTest {
                 Instruction.RIGHT, Instruction.FORWARD, Instruction.FORWARD, Instruction.LEFT, Instruction.FORWARD);
     }
     @Test
-    public void mowerIsCorrectlyInitializedFromString() {
+     void mowerIsCorrectlyInitializedFromString() {
         // When
         Mower mower = MowerFactory.fromString("3 5 N");
         // Then

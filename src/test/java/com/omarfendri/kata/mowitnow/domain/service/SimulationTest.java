@@ -13,18 +13,18 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class SimulationTest {
+class SimulationTest {
     private SimulationService simulationService;
     private Grid grid;
 
     @BeforeEach
-    public void setup(){
+    void setup(){
         simulationService = new SimulationService();
         grid = GridFactory.fromString("7 7");
     }
 
     @Test
-    public void mowerMovesForwardWhenFacingNorth() {
+    void mowerMovesForwardWhenFacingNorth() {
         // Given
         Mower mower = MowerFactory.fromString("3 5 N");
         // When
@@ -36,7 +36,7 @@ public class SimulationTest {
     }
 
     @Test
-    public void mowerMovesForwardWhenFacingSouth() {
+    void mowerMovesForwardWhenFacingSouth() {
         // Given
         Mower mower = MowerFactory.fromString("3 5 S");
         // When
@@ -48,7 +48,7 @@ public class SimulationTest {
     }
 
     @Test
-    public void mowerMovesForwardWhenFacingEast() {
+    void mowerMovesForwardWhenFacingEast() {
         // Given
         Mower mower = MowerFactory.fromString("3 5 E");
         // When
@@ -60,7 +60,7 @@ public class SimulationTest {
     }
 
     @Test
-    public void mowerMovesForwardWhenFacingWest() {
+    void mowerMovesForwardWhenFacingWest() {
         // Given
         Mower mower = MowerFactory.fromString("3 5 W");
         // When
@@ -72,7 +72,7 @@ public class SimulationTest {
     }
 
     @Test
-    public void mowerTurnsLeftFromNorthToWest() {
+    void mowerTurnsLeftFromNorthToWest() {
         // Given
         Mower mower = MowerFactory.fromString("3 5 N");
         // When
@@ -84,7 +84,7 @@ public class SimulationTest {
     }
 
     @Test
-    public void mowerTurnsLeftFromWestToSouth() {
+    void mowerTurnsLeftFromWestToSouth() {
         // Given
         Mower mower = MowerFactory.fromString("3 5 W");
         // When
@@ -96,7 +96,7 @@ public class SimulationTest {
     }
 
     @Test
-    public void mowerTurnsRightFromWestToNorth() {
+    void mowerTurnsRightFromWestToNorth() {
         //Given
         Mower mower = MowerFactory.fromString("3 5 W");
         // When
@@ -108,7 +108,7 @@ public class SimulationTest {
     }
 
     @Test
-    public void mowerTurnsRightFromNorthToEast() {
+    void mowerTurnsRightFromNorthToEast() {
         // Given
         Mower mower = MowerFactory.fromString("3 5 N");
         // When
@@ -120,7 +120,7 @@ public class SimulationTest {
     }
 
     @Test
-    public void mowerDoesNotMoveBeyondGridEdgeWhenMovingForward() {
+    void mowerDoesNotMoveBeyondGridEdgeWhenMovingForward() {
         // Given
         Mower mower = MowerFactory.fromString("3 7 N");
         // When
@@ -132,7 +132,7 @@ public class SimulationTest {
     }
 
     @Test
-    public void autonomousMowerMovesToCorrectPosition() {
+    void autonomousMowerMovesToCorrectPosition() {
         // Given
         grid = GridFactory.fromString("5 5");
         AutonomousMower autonomousMower = MowerFactory

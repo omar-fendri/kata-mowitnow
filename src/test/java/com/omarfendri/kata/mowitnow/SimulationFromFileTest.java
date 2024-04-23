@@ -16,11 +16,11 @@ import java.util.Objects;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class SimulationFromFileTest {
+class SimulationFromFileTest {
     private FileAdapter fileAdapter;
 
     @BeforeEach
-    public void setup(){
+    void setup(){
         SimulationService simulationService = new SimulationService();
         MowerStateDisplayPort mowerStateDisplayPort = new ConsoleAdapter();
         SimulationUseCase simulationUseCase = new SimulationUseCase(simulationService, mowerStateDisplayPort);
@@ -28,7 +28,7 @@ public class SimulationFromFileTest {
     }
 
     @Test
-    public void testRunSimulationFromFile() throws IOException, URISyntaxException {
+    void testRunSimulationFromFile() throws IOException, URISyntaxException {
         // Given
         ClassLoader classLoader = getClass().getClassLoader();
         Path filePath = Paths.get(Objects.requireNonNull(classLoader.getResource("mower_input.txt")).toURI());
@@ -39,7 +39,7 @@ public class SimulationFromFileTest {
     }
 
     @Test
-    public void testGridLineIsMissingParameter() throws IOException, URISyntaxException {
+    void testGridLineIsMissingParameter() throws IOException, URISyntaxException {
         // Given
         ClassLoader classLoader = getClass().getClassLoader();
         Path filePath = Paths.get(Objects.requireNonNull(classLoader.getResource("mower_error.txt")).toURI());
@@ -50,7 +50,7 @@ public class SimulationFromFileTest {
     }
 
     @Test
-    public void testGridLineIsMissingParamAeter() throws IOException, URISyntaxException {
+    void testGridLineIsMissingParamAeter() throws IOException, URISyntaxException {
         // Given
         ClassLoader classLoader = getClass().getClassLoader();
         Path filePath = Paths.get(Objects.requireNonNull(classLoader.getResource("mower_error2.txt")).toURI());
